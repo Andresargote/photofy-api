@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const { Schema, model } = require('mongoose');
+const { ObjectId } = Schema.Types;
 
 const userSchema = new Schema(
   {
@@ -20,6 +20,27 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+    },
+    instagramUsername: {
+      type: String,
+      default: null,
+    },
+    websiteUrl: {
+      type: String,
+      default: null,
+    },
+    location: {
+      type: String,
+      default: null,
+    },
+    bio: {
+      type: String,
+      default: null,
+    },
+    profileImage: {
+      type: ObjectId,
+      ref: 'Images',
+      default: null,
     },
     recoveryToken: {
       type: String,
@@ -47,6 +68,6 @@ userSchema.methods.toJSON = function () {
   return user;
 };
 
-const user = mongoose.model('User', userSchema);
+const user = model('User', userSchema);
 
 module.exports = user;
